@@ -2,51 +2,61 @@
 
 A streamlined, high-performance platform for **Technical Interviews**. This system allows users to practice coding and behavioral interviews by typing detailed answers. It features an advanced **NLP scoring engine** and **anti-cheating proctoring**.
 
-## 🚀 Key Features
+## 🚀 Features
 
-### 1. 📝 Text-Based Evaluation Engine
-- **Instant AI Feedback:** Answers are analyzed in real-time for:
-  - **Relevance:** Uses Cosine Similarity & TF-IDF to compare against model answers.
-  - **Clarity:** Checks sentence structure and vocabulary.
-  - **Completeness:** Verifies if key technical keywords are present.
-  - **Sentiment:** Analyzes confidence and tone.
-- **Strict Grading:** Generates a percentage score (0-100%) and a Letter Grade (A-F).
-
-### 2. 🛡️ Smart Proctoring
-- **Tab-Switch Detection:** Monitors focus status and logs warnings if the candidate leaves the interview tab.
-- **Timer Enforcement:** Auto-submits answers when the time limit expires.
-
-### 3. 📊 Analytics & Reports
-- **Detailed Dashboards:** Visual radar charts and bar graphs using `Recharts`.
-- **PDF Export:** Download a complete performance report with one click.
-- **Admin Panel:** Manage users and view platform-wide statistics.
+- **🤖 AI-Driven Interviews:** Questions generated based on role (Frontend, Backend, etc.).
+- **📝 Text-Based Evaluation:** Instant feedback on technical accuracy and communication.
+- **📊 Detailed Analytics:** Skill breakdown graphs, progress tracking, and PDF reports.
+- **🛡️ Smart Proctoring:** Detects tab switching and alerts the user to maintain integrity.
+- **⚡ Admin Panel:** Dashboard to monitor user activity and view stats.
 
 ---
 
-## 🛠️ Tech Stack
+## 🧠 AI & Evaluation Logic
 
-### **Frontend**
-- **Next.js 14** (App Router)
-- **TypeScript** & **Tailwind CSS**
-- **Framer Motion** (Animations)
-- **Recharts** (Data Visualization)
+The core of this project is the **Python AI Service** (`evaluator.py`), which uses Natural Language Processing (NLP) to grade answers objectively.
 
-### **Backend**
-- **Node.js** + **Express**
-- **MongoDB Atlas** (Data Persistence)
-- **JWT** (Secure Authentication)
+### 1. NLP Relevance Scoring (TF-IDF & Cosine Similarity)
+*   **Vectorization:** We use `TfidfVectorizer` from Scikit-Learn to convert both the **Student's Answer** and the **Model Answer** into numerical vectors.
+*   **Similarity:** We calculate the **Cosine Similarity** between these two vectors.
+    *   `Score = 1.0` (Perfect Match)
+    *   `Score = 0.0` (Completely Irrelevant)
+*   **Why?** This ensures the candidate captures the *meaning* of the answer, not just exact words.
 
-### **AI Engine (Python)**
-- **FastAPI** (High-performance API)
-- **Scikit-Learn** (TF-IDF & Cosine Similarity)
-- **TextBlob** (Sentiment Analysis)
+### 2. Keyword Completeness
+*   Every question in the `Question Bank` has a list of required **Keywords** (e.g., for React: "components", "hooks", "virtual DOM").
+*   We use Regex to check how many keywords are present in the candidate's answer.
+*   **Formula:** `(Matched Keywords / Total Keywords) * 100`
 
----
+### 3. Sentiment & Confidence
+*   We use **TextBlob** to analyze the sentiment polarity (-1 to +1).
+*   We check for **Confidence Indicators** (e.g., "definitely", "proven") vs. **Hesitation Words** (e.g., "maybe", "I guess").
 
-## ⚙️ Installation & Setup
+### 4. Final Scoring Algorithm
+The final score is a weighted average of multiple metrics:
+```python
+Overall Score = (Relevance * 0.40) + 
+                (Completeness * 0.35) + 
+                (Clarity * 0.15) + 
+                (Confidence * 0.10)
+🛠️ Tech Stack
+Frontend
+Next.js 14 (App Router)
+TypeScript & Tailwind CSS
+Framer Motion (Animations)
+Recharts (Analytics)
+Backend
+Node.js + Express
+MongoDB Atlas (Data Persistence)
+JWT (Secure Authentication)
+AI Engine (Python)
+FastAPI (High-performance API)
+Scikit-Learn (TF-IDF & Cosine Similarity)
+TextBlob (Sentiment Analysis)
+⚙️ Installation & Setup
+1. Clone the Repository
+Bash
 
-### 1. Clone the Repository
-```bash
 git clone https://github.com/harishgm1236-debug/text-interview-ai.git
 cd text-interview-ai
 2. Setup AI Service (Python)
@@ -86,10 +96,9 @@ text
 
 ├── FRONTEND/          # Next.js UI (Dashboard, Interview, Reports)
 ├── BACKEND/           # Express API (Auth, DB Connections)
-├── AI-INTERVIEW-AI/   # Python NLP Engine (Scoring)
+├── AI-INTERVIEW-AI/   # Python NLP Engine (Scoring Logic)
 └── README.md          # Documentation
 👨‍💻 Developed By
 Harish G M - Full Stack Developer & AI Enthusiast.
 
 Built for the Future of Recruitment. 🚀
-
