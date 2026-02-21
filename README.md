@@ -1,122 +1,95 @@
-# 🎯 AI Interview Preparation Platform
+# 📝 AI Text-Based Interview Platform
 
-An advanced AI-powered platform that helps job seekers practice technical interviews with real-time feedback using **Computer Vision**, **NLP**, and **Speech Analysis**.
-
----
+A streamlined, high-performance platform for **Technical Interviews**. This system allows users to practice coding and behavioral interviews by typing detailed answers. It features an advanced **NLP scoring engine** and **anti-cheating proctoring**.
 
 ## 🚀 Key Features
 
-### 🤖 AI-Driven Interviews
-- Role-based question generation (Frontend, Backend, etc.)
-- Resume-based personalized interviews (PDF upload)
+### 1. 📝 Text-Based Evaluation Engine
+- **Instant AI Feedback:** Answers are analyzed in real-time for:
+  - **Relevance:** Uses Cosine Similarity & TF-IDF to compare against model answers.
+  - **Clarity:** Checks sentence structure and vocabulary.
+  - **Completeness:** Verifies if key technical keywords are present.
+  - **Sentiment:** Analyzes confidence and tone.
+- **Strict Grading:** Generates a percentage score (0-100%) and a Letter Grade (A-F).
 
-### 📹 Multimodal Evaluation
-- **Facial Emotion Detection** (DeepFace)
-- **Speech Analysis** (WPM + filler words)
-- **Text Evaluation** (Relevance, clarity, technical depth)
+### 2. 🛡️ Smart Proctoring
+- **Tab-Switch Detection:** Monitors focus status and logs warnings if the candidate leaves the interview tab.
+- **Timer Enforcement:** Auto-submits answers when the time limit expires.
 
-### 📊 Performance Analytics
-- Skill breakdown charts
-- Progress tracking
-- Downloadable PDF reports
-
-### 🕵️ Smart Proctoring
-- Tab switching detection
-- Interview integrity monitoring
-
-### 🔐 Admin Panel
-- User monitoring
-- Platform statistics dashboard
+### 3. 📊 Analytics & Reports
+- **Detailed Dashboards:** Visual radar charts and bar graphs using `Recharts`.
+- **PDF Export:** Download a complete performance report with one click.
+- **Admin Panel:** Manage users and view platform-wide statistics.
 
 ---
 
 ## 🛠️ Tech Stack
 
-### 🌐 Frontend (`ai-interview`)
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Recharts
+### **Frontend**
+- **Next.js 14** (App Router)
+- **TypeScript** & **Tailwind CSS**
+- **Framer Motion** (Animations)
+- **Recharts** (Data Visualization)
 
-### 🧠 Backend (`ai-interview-backend`)
-- Node.js
-- Express.js
-- MongoDB Atlas
-- JWT Authentication
+### **Backend**
+- **Node.js** + **Express**
+- **MongoDB Atlas** (Data Persistence)
+- **JWT** (Secure Authentication)
 
-### 🤖 AI Service (`ai-interview-ai`)
-- Python + FastAPI
-- DeepFace (Emotion Detection)
-- Librosa (Audio Processing)
-- Scikit-Learn (TF-IDF / Cosine Similarity)
-- Google Speech Recognition
-
----
-
-## 📂 Project Structure
-
-interview/
-│
-├── ai-interview/ # Frontend (Next.js)
-├── ai-interview-backend/ # Node.js API
-├── ai-interview-ai/ # Python AI Engine
-└── README.md
-
+### **AI Engine (Python)**
+- **FastAPI** (High-performance API)
+- **Scikit-Learn** (TF-IDF & Cosine Similarity)
+- **TextBlob** (Sentiment Analysis)
 
 ---
 
 ## ⚙️ Installation & Setup
 
-### 1️⃣ Clone the Repository
-
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/harishgm1236-debug/interview.git
-cd interview
-2️⃣ Setup AI Service (Python)
-cd ai-interview-ai
+git clone https://github.com/harishgm1236-debug/text-interview-ai.git
+cd text-interview-ai
+2. Setup AI Service (Python)
+Bash
+
+cd AI-INTERVIEW-AI
 python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
-
+# Windows: venv\Scripts\activate  |  Mac/Linux: source venv/bin/activate
 pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
-3️⃣ Setup Backend (Node.js)
-cd ../ai-interview-backend
-npm install
-Create .env file:
+python -m uvicorn main:app --reload --port 8000
+3. Setup Backend (Node.js)
+Open a new terminal:
 
-MONGO_URI=mongodb+srv://harish:harish123@cluster0.ebvooua.mongodb.net/ai_interview?retryWrites=true&w=majority
-JWT_SECRET=supersecretjwtkey
-Run:
+Bash
 
-npm run seed   # Optional (Creates Admin)
-npm run dev    # Runs on Port 5000
-4️⃣ Setup Frontend (Next.js)
-cd ../ai-interview
+cd ../BACKEND
 npm install
-npm run dev    # Runs on Port 3000
-🔑 Default Credentials (After Seeding)
+# Create .env file with MONGO_URI and JWT_SECRET
+npm run seed  # (Optional: Creates Admin User)
+npm run dev   # Runs on Port 5000
+4. Setup Frontend (Next.js)
+Open a new terminal:
+
+Bash
+
+cd ../FRONTEND
+npm install
+npm run dev   # Runs on Port 3000
+🔑 Default Credentials
+If you ran the seed script, use these to login:
+
 Role	Email	Password
 Admin	admin@interviewai.com	admin123456
 User	test@interviewai.com	test123456
-🏗 Architecture Overview
-Frontend → Backend API → AI Engine
-Next.js → Express → FastAPI → ML Models
+📂 Project Structure
+text
 
-🚀 Future Enhancements
-AI-powered adaptive difficulty
-
-Live coding environment
-
-Real-time voice confidence scoring
-
-AI interview simulation with avatar
-
+├── FRONTEND/          # Next.js UI (Dashboard, Interview, Reports)
+├── BACKEND/           # Express API (Auth, DB Connections)
+├── AI-INTERVIEW-AI/   # Python NLP Engine (Scoring)
+└── README.md          # Documentation
 👨‍💻 Developed By
-Harish G M
-Full Stack Developer & AI Enthusiast
-Building the Future of Recruitment 🚀
+Harish G M - Full Stack Developer & AI Enthusiast.
+
+Built for the Future of Recruitment. 🚀
 
